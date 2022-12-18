@@ -1,7 +1,7 @@
 # mini_projeto
 
 Mini-projeto da disciplina programação web
-
-Componentes:
-Alef Luciano Silva
-Hilário Petronio de Medeiros Dantas
+============================================
+<p>Componentes:</p>
+<p>Alef Luciano Silva</p>
+<p>Hilário Petronio de Medeiros Dantas</p>
