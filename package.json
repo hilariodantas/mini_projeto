@@ -1,0 +1,26 @@
+{
+  "name": "mini_projeto",
+  "version": "1.0.0",
+  "description": "Mini-projeto da disciplina programação web ============================================ <p>Componentes:</p> <p>Alef Luciano Silva</p> <p>Hilário Petronio de Medeiros Dantas</p>",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hilariodantas/mini_projeto.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hilariodantas/mini_projeto/issues"
+  },
+  "homepage": "https://github.com/hilariodantas/mini_projeto#readme",
+  "dependencies": {
+    "next": "^13.0.7",
+    "react": "^18.2.0",
+    "swr": "^2.0.0"
+  }
+}
