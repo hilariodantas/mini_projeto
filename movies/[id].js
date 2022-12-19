@@ -1,6 +1,14 @@
+import MessageWarning from "../../../../components/messageWarning/messageWarning"
+
 export default function TheMovie({data}){
 
-    if(data === undefined) return <div>Carregando...</div>
+    if(data === undefined) return <div>Carregando ...</div>
+
+    if(data.Response === 'False') {
+        return (
+            <MessageWarning texto={'Sem o recurso solicitado no sistema.'}/>
+        )
+    }
     
     return (
 
