@@ -1,4 +1,3 @@
-import MessageWarning from "../../../../components/messageWarning/messageWarning"
 
 export default function TheMovie({data}){
 
