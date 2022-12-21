@@ -1,40 +1,114 @@
-import Base from "../../../components/base";
-import Link from "next/link";
+import useSWR from 'swr'
+import {useState} from 'react'
 
-export default function Receita9(){
+export function TheForm(){
+
     return (
-        <div>
-            <style jsx>{`
-                @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap');
-                nav{
-                    margin-top: 20px;
-                    display: flex;
-                    gap: 10px;
-                    justify-content: center;
-                }
-                a {
-                    text-decoration: none;
-                    color: #1C1C1C;
-                    font-weight: 400;
-                    font-family: 'Lato', 'sans-serif';
-                    font-size: 20px;
-                    padding: 5px;
-                }
-                a:hover {
-                    color: #0489B1;
-                }
-            `}
-            </style>
 
-        
-            <Base title={'Receita 9'} 
-            conteudo={'Esta aplicação é fruto do desenvolvimento dos exercícios práticos da Receita 9 da disciplina Programação Web.'}
-        
-            />
-            <nav>
-                <Link href='/'><a>Página principal</a></Link>
-            </nav>
+        <div>
+
+            <form>
+
+                <label htmlFor="titleSearchString">Filtro de Título</label>
+
+                <input id="titleSearchString" name="titleSearchString" type="text" autoComplete="true"/>
+
+            </form>
 
         </div>
+
     )
+
+}
+
+export function TheMovies({data,show}){
+
+    if (!show) return (<div></div>)
+
+    if (!data) return (<div></div>)
+
+    if (data.error) return (<div>falha na pesquisa</div>)
+
+    if (data.Search === '' ) return (<div>carregando...</div>)
+
+    return (
+
+        <div>
+
+            { data.Search.map( (m) => <div key={m.imdbID}>{m.Title} --- {m.Year}</div>  ) }            
+
+        </div>
+
+    )
+
+}
+
+
+
+export function TheLink({url, handler}){
+
+    return (
+
+        <div>
+
+            <a href="/movies3.js" onClick={handler}> {url === '' ? 'Mostrar' : 'Ocultar'} </a>
+
+        </div>
+
+    )
+
+}
+
+export default function Movies33(){
+
+    const [state, setState] = useState({url:'', titleSearchString:''})
+
+    const {data, error} = useSWR(state.url, async (u) => {
+
+        if (!state.url || !state.titleSearchString) return {Search:''}
+
+        if (state.url === '' || state.titleSearchString ==='') return {Search:''}
+
+        const res = await fetch(`${state.url}/?apiKey=678e6ae&s=${state.titleSearchString}`)
+
+        const json = await res.json();
+
+        return json;
+
+    })
+
+    const onClickHandler = e => {
+
+        e.preventDefault()
+
+        let s = document.getElementById('titleSearchString').value
+
+        if (state.url === '') {
+
+            setState({url:'http://www.omdbapi.com',titleSearchString:s})
+
+        }
+
+        else setState({url:'',titleSearchString: state.titleSearchString})
+
+    }
+
+
+
+    return (
+
+        <div>
+
+            <TheForm/>
+
+            <TheLink url={state.url} handler={onClickHandler} />
+
+            <TheMovies data={data ? data: {Search:''} } show={state.url !== ''} />
+
+        
+
+        </div>
+
+    )
+
 }
